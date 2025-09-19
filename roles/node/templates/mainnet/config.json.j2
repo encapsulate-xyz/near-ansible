@@ -1,0 +1,331 @@
+{
+  "genesis_file": "{{ node_genesis_file_path }}",
+  "genesis_records_file": null,
+  "validator_key_file": "{{ node_validator_key_path }}",
+  "node_key_file": "{{ node_node_key_path }}",
+  "rpc": {
+    "addr": "0.0.0.0:{{ near.validator.ports.rpc_port }}",
+    "prometheus_addr": "0.0.0.0:{{ near.validator.ports.metrics_port }}",
+    "cors_allowed_origins": [
+      "*"
+    ],
+    "polling_config": {
+      "polling_interval": {
+        "secs": 0,
+        "nanos": 500000000
+      },
+      "polling_timeout": {
+        "secs": 10,
+        "nanos": 0
+      }
+    },
+    "limits_config": {
+      "json_payload_max_size": 10485760
+    },
+    "enable_debug_rpc": false,
+    "experimental_debug_pages_src_path": null
+  },
+  "telemetry": {
+    "endpoints": [
+      "https://telemetry.nearone.org/nodes",
+      "https://explorer.mainnet.near.org/api/nodes",
+      "https://telemetry.nearone.org/nodes"
+    ],
+    "reporting_interval": {
+      "secs": 10,
+      "nanos": 0
+    }
+  },
+  "network": {
+    "addr": "0.0.0.0:{{ near.validator.ports.p2p_port }}",
+    "boot_nodes": "ed25519:CZemYnWJ5tS4K5LHzATfV43sb6tQWyTgxnts5e4xe2ar@188.214.131.17:24567,ed25519:BcDUAtDtA9LpTwav77g2odCNq2xcsrwsMC42AfW2ewsP@20.57.81.145:24567,ed25519:EnLZM9A7NuSTZPvjkwhfL9Bbs94RQE2QZLzrLo9DSEcU@162.55.128.199:24567,ed25519:9H3jWd3b54yRj8h4MXH9vvD98MjteHRoAkcRLWteNxA5@135.181.181.233:24567,ed25519:BKgRXmMYuWXwTzS9izTh1g7NYL5q2A8azywfz9i8eUg9@65.109.69.56:24567,ed25519:HYGVjS4sFkst4P7ez4HBfozYTaFHHNk2k47G3gLrYJD9@34.40.98.145:24567,ed25519:DgoEEZrefAQof8YHHK3tYYo5x8wNzshcW86pGytZhQ6R@167.235.7.126:24567,ed25519:4QVuhV13JHnNyHiSas92VPmdiAusxHwo1FmVgbYDYx75@15.235.53.60:24567,ed25519:8eAsWkCWhF1BW3gKjcqpKPM1D6qvZEFGgtHkaCWRWYG3@79.127.216.35:24567,ed25519:29aEj9DaEbJJCTx7SZDkTgsS8sG3rLUoAKV8QKDvgrZp@67.213.124.63:24567,ed25519:4EaynTMED6mTS9FrgkbJAhQ6cURLm6jDdcsKT5Y9CFSE@74.50.120.247:24567,ed25519:Bn6WURJMmzMVhs9jUa9YYjbR179Nediyp3mpwKe4YcCt@5.9.113.174:24567,ed25519:HwNNFvomakQw9fDTfek8HghQQYUsVJFbjJ2j3zfsqkKj@37.27.55.251:24567,ed25519:GvtZsbAnJs8fyeqL9YeTH7BnvMM5vUzxFNt4n6SG7fo5@65.21.227.134:24567,ed25519:Ca9D1NHvKigv41sAW4z2nPB6gxxioNhw6CSWGLr1oJZS@188.40.83.218:24567,ed25519:9nX7CuLtX7NrxSpALsX4MmV3VJWgfcfUy3TGpNyZywoY@23.227.167.18:24567,ed25519:HXBDTqcCFGcp6qdn9qpfaHS3veQDACSrwV3a9m7VHRJx@162.55.87.47:24567,ed25519:3dquNjWT3ynffL2dwaXpXStsRdD61WPqYi5gGew6bWiG@107.23.208.57:24567,ed25519:4AqRkKWdUXCDVEHu5bvP83sxs2nCP5MfKuaAT8M599hf@148.113.166.77:24567,ed25519:3qCpbhvefY6SJMtFvPJ1WKdMqWjk6FYsHRzRgKVTS8qB@65.21.8.47:24567,ed25519:626cEGE18tMfno7dFWdUuaR13CXaf1jtezLg9tmWvvrJ@15.204.102.116:24567,ed25519:Guvgd7KfKDEZjPQQ4SB2ggaKDmXiunQvcqKvNgfqR8Y6@8.218.37.88:24567,ed25519:DQTXcj3hm5v7qVdmyHS4KWp3QTKzFJu27KSteNfXcgFV@195.3.223.31:24567,ed25519:F9oxYrM2E6YHHPm4eWbnFQdBWmNACpffYwodgbMvzZqk@65.109.21.178:24567,ed25519:76MNCCa8SFSXeAnJT93tY4LcaSKP3EehJKvGxwptQMME@3.255.190.200:24567,ed25519:FuxcpgBCmP5fcTNymnxtpeLMhdNLZSFDYJvMtBJiTpky@148.113.213.7:24567,ed25519:3Z7czVFvXDcPtdbHk6mer9Gr5V4iMBRbRYDthRGv2Rar@42.113.167.247:24467,ed25519:AaeZnh2XyhDNwZ6pJ5A7w4NdDUT1ktVjM8LxNt1yZGeU@23.92.65.15:24567,ed25519:YNNB1Xbdrz7aSPpTkoi8FGn2EwXm1DJLXvZdpCLoJJm@23.92.65.155:24567,ed25519:7vgGDhjqpDPUEgi4AtyPG12CPXE87Us33U6zK3nch6vx@138.201.37.151:24567",
+    "whitelist_nodes": "",
+    "max_num_peers": 40,
+    "minimum_outbound_peers": 5,
+    "ideal_connections_lo": 30,
+    "ideal_connections_hi": 35,
+    "so_recv_buffer_size": 1000000,
+    "so_send_buffer_size": 1000000,
+    "peer_recent_time_window": {
+      "secs": 600,
+      "nanos": 0
+    },
+    "safe_set_size": 20,
+    "archival_peer_connections_lower_bound": 10,
+    "handshake_timeout": {
+      "secs": 20,
+      "nanos": 0
+    },
+    "skip_sync_wait": false,
+    "ban_window": {
+      "secs": 10800,
+      "nanos": 0
+    },
+    "blacklist": [],
+    "ttl_account_id_router": {
+      "secs": 3600,
+      "nanos": 0
+    },
+    "peer_stats_period": {
+      "secs": 5,
+      "nanos": 0
+    },
+    "monitor_peers_max_period": {
+      "secs": 60,
+      "nanos": 0
+    },
+    "peer_states_cache_size": 1000,
+    "snapshot_hosts_cache_size": 1000,
+    "peer_expiration_duration": {
+      "secs": 604800,
+      "nanos": 0
+    },
+    "public_addrs": [],
+    "allow_private_ip_in_public_addrs": false,
+    "trusted_stun_servers": [
+      "stun.l.google.com:19302",
+      "stun1.l.google.com:19302",
+      "stun2.l.google.com:19302",
+      "stun3.l.google.com:19302",
+      "stun4.l.google.com:19302"
+    ],
+    "experimental": {
+      "inbound_disabled": false,
+      "connect_only_to_boot_nodes": false,
+      "skip_sending_tombstones_seconds": 0,
+      "tier1_enable_inbound": true,
+      "tier1_enable_outbound": true,
+      "tier1_connect_interval": {
+        "secs": 60,
+        "nanos": 0
+      },
+      "tier1_new_connections_per_attempt": 50,
+      "network_config_overrides": {
+        "connect_to_reliable_peers_on_startup": null,
+        "max_send_peers": null,
+        "routed_message_ttl": null,
+        "max_routes_to_store": null,
+        "highest_peer_horizon": null,
+        "push_info_period_millis": null,
+        "outbound_disabled": null,
+        "accounts_data_broadcast_rate_limit_burst": null,
+        "accounts_data_broadcast_rate_limit_qps": null,
+        "routing_table_update_rate_limit_burst": null,
+        "routing_table_update_rate_limit_qps": null,
+        "received_messages_rate_limits": null
+      }
+    }
+  },
+  "consensus": {
+    "min_num_peers": 3,
+    "block_production_tracking_delay": {
+      "secs": 0,
+      "nanos": 100000000
+    },
+    "min_block_production_delay": {
+      "secs": 0,
+      "nanos": 600000000
+    },
+    "max_block_production_delay": {
+      "secs": 1,
+      "nanos": 800000000
+    },
+    "max_block_wait_delay": {
+      "secs": 6,
+      "nanos": 0
+    },
+    "chunk_wait_mult": [
+      1,
+      3
+    ],
+    "produce_empty_blocks": true,
+    "block_fetch_horizon": 50,
+    "block_header_fetch_horizon": 50,
+    "catchup_step_period": {
+      "secs": 0,
+      "nanos": 100000000
+    },
+    "chunk_request_retry_period": {
+      "secs": 0,
+      "nanos": 400000000
+    },
+    "header_sync_initial_timeout": {
+      "secs": 10,
+      "nanos": 0
+    },
+    "header_sync_progress_timeout": {
+      "secs": 2,
+      "nanos": 0
+    },
+    "header_sync_stall_ban_timeout": {
+      "secs": 120,
+      "nanos": 0
+    },
+    "state_sync_external_timeout": {
+      "secs": 60,
+      "nanos": 0
+    },
+    "state_sync_p2p_timeout": {
+      "secs": 10,
+      "nanos": 0
+    },
+    "state_sync_retry_backoff": {
+      "secs": 1,
+      "nanos": 0
+    },
+    "state_sync_external_backoff": {
+      "secs": 60,
+      "nanos": 0
+    },
+    "header_sync_expected_height_per_second": 10,
+    "sync_check_period": {
+      "secs": 10,
+      "nanos": 0
+    },
+    "sync_step_period": {
+      "secs": 0,
+      "nanos": 10000000
+    },
+    "doomslug_step_period": {
+      "secs": 0,
+      "nanos": 100000000
+    },
+    "sync_height_threshold": 1,
+    "sync_max_block_requests": 10
+  },
+  "tracked_shards_config": "NoShards",
+  "log_summary_style": "colored",
+  "log_summary_period": {
+    "secs": 10,
+    "nanos": 0
+  },
+  "enable_multiline_logging": false,
+  "gc_blocks_limit": 2,
+  "gc_fork_clean_step": 100,
+  "gc_num_epochs_to_keep": 3,
+  "gc_step_period": {
+    "secs": 0,
+    "nanos": 500000000
+  },
+  "view_client_threads": 4,
+  "view_client_throttle_period": {
+    "secs": 30,
+    "nanos": 0
+  },
+  "view_client_num_state_requests_per_throttle_period": 30,
+  "trie_viewer_state_size_limit": 50000,
+  "store": {
+    "path": null,
+    "enable_statistics": false,
+    "enable_statistics_export": true,
+    "max_open_files": 10000,
+    "col_state_cache_size": 3221225472,
+    "col_flat_state_cache_size": 134217728,
+    "block_size": 16384,
+    "trie_cache": {
+      "default_max_bytes": 500000000,
+      "per_shard_max_bytes": {
+        "s1.v3": 50000000,
+        "s1.v1": 50000000,
+        "s3.v1": 3000000000,
+        "s2.v3": 1500000000,
+        "s2.v2": 3000000000,
+        "s1.v2": 50000000,
+        "s5.v3": 3000000000,
+        "s4.v2": 3000000000,
+        "s3.v3": 1500000000
+      },
+      "shard_cache_deletions_queue_capacity": 100000
+    },
+    "view_trie_cache": {
+      "default_max_bytes": 50000000,
+      "per_shard_max_bytes": {},
+      "shard_cache_deletions_queue_capacity": 100000
+    },
+    "enable_receipt_prefetching": true,
+    "sweat_prefetch_receivers": [
+      "token.sweat",
+      "vfinal.token.sweat.testnet"
+    ],
+    "sweat_prefetch_senders": [
+      "oracle.sweat",
+      "sweat_the_oracle.testnet"
+    ],
+    "claim_sweat_prefetch_config": [
+      {
+        "receiver": "claim.sweat",
+        "sender": "token.sweat",
+        "method_name": "record_batch_for_hold"
+      },
+      {
+        "receiver": "claim.sweat",
+        "sender": "",
+        "method_name": "claim"
+      }
+    ],
+    "kaiching_prefetch_config": [
+      {
+        "receiver": "earn.kaiching",
+        "sender": "wallet.kaiching",
+        "method_name": "ft_on_transfer"
+      }
+    ],
+    "load_mem_tries_for_shards": [],
+    "load_mem_tries_for_tracked_shards": true,
+    "state_snapshot_config": {
+      "state_snapshot_type": "Enabled"
+    }
+  },
+  "state_sync_enabled": true,
+  "state_sync": {
+    "sync": {
+      "ExternalStorage": {
+        "location": {
+          "GCS": {
+            "bucket": "state-parts"
+          }
+        },
+        "num_concurrent_requests": 25,
+        "num_concurrent_requests_during_catchup": 5,
+        "external_storage_fallback_threshold": 3
+      }
+    }
+  },
+  "epoch_sync": {
+    "disable_epoch_sync_for_bootstrapping": false,
+    "ignore_epoch_sync_network_requests": false,
+    "epoch_sync_horizon": 216000,
+    "timeout_for_epoch_sync": {
+      "secs": 60,
+      "nanos": 0
+    }
+  },
+  "transaction_pool_size_limit": 100000000,
+  "resharding_config": {
+    "batch_size": 500000,
+    "batch_delay": {
+      "secs": 0,
+      "nanos": 5000000
+    },
+    "retry_delay": {
+      "secs": 10,
+      "nanos": 0
+    },
+    "initial_delay": {
+      "secs": 0,
+      "nanos": 0
+    },
+    "max_poll_time": {
+      "secs": 7200,
+      "nanos": 0
+    },
+    "catch_up_blocks": 20
+  },
+  "tx_routing_height_horizon": 4,
+  "produce_chunk_add_transactions_time_limit": null,
+  "orphan_state_witness_pool_size": 25,
+  "orphan_state_witness_max_size": 40000000,
+  "max_loaded_contracts": 256,
+  "save_latest_witnesses": false,
+  "transaction_request_handler_threads": 4
+}
