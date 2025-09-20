@@ -6,7 +6,7 @@
     version: "{{ near.validator.version }}"
     force: true
 
-- name: Build the binary using `make release`
+- name: Build the binary using make release
   community.general.make:
     chdir: "{{ tmp_dir }}/{{ project }}"
     target: release
