@@ -21,5 +21,5 @@ node_log_file_path: "{{ node_log_dir }}/{{ service_identifier }}.log"
 node_config_file_path: "{{ node_home_dir }}/{{ node_config_file_name }}"
 node_genesis_file_path: "{{ node_config_dir }}/{{ node_genesis_file_name }}"
 
-node_node_key_path: "{{ node_key_dir }}/{{ node_node_key_file_name }}"
+node_key_path: "{{ node_key_dir }}/{{ node_key_file_name }}"
 node_validator_key_path: "{{ node_key_dir }}/{{ node_validator_key_file_name }}"

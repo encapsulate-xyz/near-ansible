@@ -4,7 +4,7 @@
 # config file names
 node_config_file_name: config.json
 node_genesis_file_name: genesis.json
-node_node_key_file_name: node_key.json
+node_key_file_name: node_key.json
 node_validator_key_file_name: validator_key.json
 
 # binary names
