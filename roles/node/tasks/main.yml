@@ -48,6 +48,9 @@
   notify:
     - Restart service
 
+- name: Include get boot nodes task
+  ansible.builtin.include_tasks: get_boot_nodes.yml
+
 - name: Copy node configuration file
   ansible.builtin.template:
     src: "{{ env }}/config.json.j2"

@@ -7,3 +7,4 @@ near:
     validator_cli_version: v0.1.8
     rust:
       version: 1.87.0
+    rpc_url: https://rpc.mainnet.near.org
