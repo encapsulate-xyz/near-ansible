@@ -3,8 +3,11 @@
 near:
   validator:
     version: 2.8.0
-    cli_version: v0.22.2
-    validator_cli_version: v0.1.8
+    cli:
+      general:
+        version: v0.22.2
+      validator:
+        version: v0.1.8
     rust:
       version: 1.87.0
     rpc_url: https://rpc.mainnet.near.org

@@ -21,7 +21,7 @@
   ansible.builtin.include_tasks: extract_binary.yml
   vars:
     suffix_url: "near-cli-rs-{{ ansible_architecture }}-unknown-{{ ansible_system | lower }}-gnu.tar.gz"
-    source_url: "{{ near.validator.cli_source_url }}/{{ near.validator.cli_version }}/{{ suffix_url }}"
+    source_url: "{{ near.validator.cli.general.source_url }}/{{ near.validator.cli.general.version }}/{{ suffix_url }}"
     extracted_dir: "near-cli-rs-{{ ansible_architecture }}-unknown-{{ ansible_system | lower }}-gnu"
     binary_src_dir: "{{ extracted_dir }}/{{ node_binaries.near_cli.default_binary_name }}"
     dest_file_name: "{{ node_binaries.near_cli.dest_binary_name }}"
@@ -30,7 +30,7 @@
   ansible.builtin.include_tasks: extract_binary.yml
   vars:
     suffix_url: "near-validator-{{ ansible_architecture }}-unknown-{{ ansible_system | lower }}-gnu.tar.gz"
-    source_url: "{{ near.validator.validator_cli_source_url }}/{{ near.validator.validator_cli_version }}/{{ suffix_url }}"
+    source_url: "{{ near.validator.cli.validator.source_url }}/{{ near.validator.cli.validator.version }}/{{ suffix_url }}"
     extracted_dir: "near-validator-{{ ansible_architecture }}-unknown-{{ ansible_system | lower }}-gnu"
     binary_src_dir: "{{ extracted_dir }}/{{ node_binaries.near_validator_cli.default_binary_name }}"
     dest_file_name: "{{ node_binaries.near_validator_cli.dest_binary_name }}"
