@@ -1,0 +1,24 @@
+---
+- name: Get boot nodes
+  ansible.builtin.shell: |
+    set -o pipefail
+    curl -s -X POST {{ near.validator.rpc_url }} \
+      -H "Content-Type: application/json" \
+      -d '{
+        "jsonrpc": "2.0",
+        "method": "network_info",
+        "params": [],
+        "id": "dontcare"
+      }' | jq -r '.result.active_peers as $list1 | .result.known_producers as $list2 |
+          $list1[] as $active_peer | $list2[] |
+          select(.peer_id == $active_peer.id) |
+          "\(.peer_id)@\($active_peer.addr)"' | paste -sd "," -
+  args:
+    executable: /bin/bash
+  register: boot_nodes_result
+  changed_when: false
+  failed_when: boot_nodes_result.rc != 0
+
+- name: Set boot nodes variable
+  ansible.builtin.set_fact:
+    boot_nodes: "{{ boot_nodes_result.stdout }}"

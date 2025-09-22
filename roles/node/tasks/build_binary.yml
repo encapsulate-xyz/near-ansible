@@ -1,0 +1,33 @@
+---
+- name: Clone the repository
+  ansible.builtin.git:
+    repo: "{{ near.validator.source_url }}"
+    dest: "{{ tmp_dir }}/{{ project }}"
+    version: "{{ near.validator.version }}"
+    force: true
+
+- name: Build the binary using make release
+  community.general.make:
+    chdir: "{{ tmp_dir }}/{{ project }}"
+    target: release
+  environment:
+    PATH: "{{ rust.path }}/bin:{{ ansible_env.PATH }}"
+    RUSTUP_HOME: "{{ rust.root }}/cargo"
+    CARGO_HOME: "{{ rust.root }}/cargo"
+
+- name: Copy the built binary to the target directory
+  ansible.builtin.copy:
+    src: "{{ tmp_dir }}/{{ project }}/target/release/{{ node_binaries.near_default.default_binary_name }}"
+    dest: "{{ node_bin_dir }}/{{ service_identifier }}"
+    mode: "0755"
+    owner: root
+    group: root
+    remote_src: true
+    force: true
+  notify:
+    - Restart service
+
+- name: Clean up the temporary repository directory
+  ansible.builtin.file:
+    path: "{{ tmp_dir }}/{{ project }}"
+    state: absent

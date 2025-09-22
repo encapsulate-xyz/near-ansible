@@ -1,0 +1,20 @@
+---
+# maintains file name, binary names, and anything which is not a directory or path
+
+# config file names
+node_config_file_name: config.json
+node_genesis_file_name: genesis.json
+node_key_file_name: node_key.json
+node_validator_key_file_name: validator_key.json
+
+# binary names
+node_binaries:
+  near_default:
+    default_binary_name: neard
+    dest_binary_name: "{{ service_identifier }}"
+  near_cli:
+    default_binary_name: near
+    dest_binary_name: near-cli
+  near_validator_cli:
+    default_binary_name: near-validator
+    dest_binary_name: near-validator-cli

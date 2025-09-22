@@ -1,0 +1,42 @@
+---
+- name: Configure sysctl settings for node
+  ansible.builtin.copy:
+    dest: "/etc/sysctl.d/99-{{ project }}-network-buffer.conf"
+    content: |
+      # Network settings for better validator performance
+      net.core.rmem_max = 8388608
+      net.core.wmem_max = 8388608
+      net.ipv4.tcp_rmem = 4096 87380 8388608
+      net.ipv4.tcp_wmem = 4096 16384 8388608
+      net.ipv4.tcp_slow_start_after_idle = 0
+    owner: root
+    group: root
+    mode: "0644"
+  register: sysctl_settings
+
+- name: Apply sysctl settings
+  ansible.builtin.command: sysctl --system
+  when: sysctl_settings.changed
+
+- name: Install required apt packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop:
+    - git
+    - binutils-dev
+    - libcurl4-openssl-dev
+    - zlib1g-dev
+    - libdw-dev
+    - libiberty-dev
+    - cmake
+    - gcc
+    - g++
+    - protobuf-compiler
+    - libssl-dev
+    - pkg-config
+    - clang
+    - llvm
+    - jq
+    - ccze

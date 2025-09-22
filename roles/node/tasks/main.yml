@@ -1,0 +1,90 @@
+---
+- name: Include the ufw vars file
+  ansible.builtin.include_vars:
+    file: vars/ufw_rules.yml
+
+- name: Apply UFW rules
+  ansible.builtin.include_tasks: tasks/apply_ufw_rules.yml
+  loop: "{{ node_ufw_rules }}"
+
+- name: Include user creation task
+  ansible.builtin.include_tasks: tasks/create_user_and_directories.yml
+  vars:
+    home: "{{ node_home_dir }}"
+    directories: "{{ node_directories }}"
+    log_file_path: "{{ node_log_file_path }}"
+
+- name: Include prepare server task
+  ansible.builtin.include_tasks: prepare_server.yml
+
+- name: Extract near cli binary
+  ansible.builtin.include_tasks: extract_binary.yml
+  vars:
+    suffix_url: "near-cli-rs-{{ ansible_architecture }}-unknown-{{ ansible_system | lower }}-gnu.tar.gz"
+    source_url: "{{ near.validator.cli.general.source_url }}/{{ near.validator.cli.general.version }}/{{ suffix_url }}"
+    extracted_dir: "near-cli-rs-{{ ansible_architecture }}-unknown-{{ ansible_system | lower }}-gnu"
+    binary_src_dir: "{{ extracted_dir }}/{{ node_binaries.near_cli.default_binary_name }}"
+    dest_file_name: "{{ node_binaries.near_cli.dest_binary_name }}"
+
+- name: Extract near validator cli binary
+  ansible.builtin.include_tasks: extract_binary.yml
+  vars:
+    suffix_url: "near-validator-{{ ansible_architecture }}-unknown-{{ ansible_system | lower }}-gnu.tar.gz"
+    source_url: "{{ near.validator.cli.validator.source_url }}/{{ near.validator.cli.validator.version }}/{{ suffix_url }}"
+    extracted_dir: "near-validator-{{ ansible_architecture }}-unknown-{{ ansible_system | lower }}-gnu"
+    binary_src_dir: "{{ extracted_dir }}/{{ node_binaries.near_validator_cli.default_binary_name }}"
+    dest_file_name: "{{ node_binaries.near_validator_cli.dest_binary_name }}"
+
+- name: Include build binary task
+  ansible.builtin.include_tasks: build_binary.yml
+
+- name: Copy genesis file
+  ansible.builtin.copy:
+    src: "{{ env }}/genesis.json"
+    dest: "{{ node_genesis_file_path }}"
+    owner: "{{ service_identifier }}"
+    group: "{{ service_identifier }}"
+    mode: "0644"
+  notify:
+    - Restart service
+
+- name: Include get boot nodes task
+  ansible.builtin.include_tasks: get_boot_nodes.yml
+
+- name: Copy node configuration file
+  ansible.builtin.template:
+    src: "{{ env }}/config.json.j2"
+    dest: "{{ node_config_file_path }}"
+    owner: "{{ service_identifier }}"
+    group: "{{ service_identifier }}"
+    mode: "0644"
+  notify:
+    - Restart service
+
+- name: Fetch secrets from HCP Vault and save to files
+  when: fetch_validator_keys | default(false) | bool
+  block:
+    - name: Fetch validator key and save
+      ansible.builtin.include_tasks: tasks/get_and_save_vault_secret.yml
+      vars:
+        vault_secret_source_path: "{{ project }}/{{ org }}/{{ type }}/{{ node_validator_key_file_name }}"
+        secret_destination_path: "{{ node_validator_key_path }}"
+        secret_type: json
+
+    - name: Fetch node key and save
+      ansible.builtin.include_tasks: tasks/get_and_save_vault_secret.yml
+      vars:
+        vault_secret_source_path: "{{ project }}/{{ org }}/{{ type }}/{{ node_key_file_name }}"
+        secret_destination_path: "{{ node_key_path }}"
+        secret_type: json
+
+- name: Copy systemd service file
+  ansible.builtin.template:
+    src: "{{ env }}/systemd.service.j2"
+    dest: /etc/systemd/system/{{ service_identifier }}.service
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Reload service
+    - Restart service
