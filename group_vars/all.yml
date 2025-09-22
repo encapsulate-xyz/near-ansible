@@ -23,12 +23,12 @@ rust:
 near:
   validator:
     source_url: https://github.com/near/nearcore
-  cli:
-    general:
-      source_url: https://github.com/near/near-cli-rs/releases/download
-    validator:
-      source_url: https://github.com/near-cli-rs/near-validator-cli-rs/releases/download
-  ports:
-    p2p_port: 24567
-    rpc_port: 3030
-    metrics_port: 3031
+    ports:
+      p2p_port: 24567
+      rpc_port: 3030
+      metrics_port: 3031
+    cli:
+      general:
+        source_url: https://github.com/near/near-cli-rs/releases/download
+      validator:
+        source_url: https://github.com/near-cli-rs/near-validator-cli-rs/releases/download
