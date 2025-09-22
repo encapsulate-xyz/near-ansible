@@ -25,7 +25,7 @@ near:
     source_url: https://github.com/near/nearcore
     ports:
       p2p_port: 24567
-      rpc_port: 3030
+      rpc_port: 3040
       metrics_port: 3031
     cli:
       general:
