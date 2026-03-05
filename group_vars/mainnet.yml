@@ -2,7 +2,7 @@
 # maintains versions and can overwrite all.yml
 near:
   validator:
-    version: 2.10.6
+    version: 2.10.7
     cli:
       general:
         version: v0.22.2
