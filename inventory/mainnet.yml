@@ -6,5 +6,5 @@ all:
   children:
     near:
       hosts:
-        validator.near.mainnet.encapsulate.xyz:
+        ts.validator.near.mainnet.encapsulate.xyz:
           type: validator
