@@ -61,6 +61,17 @@
   notify:
     - Restart service
 
+- name: Copy dummy node key file
+  ansible.builtin.copy:
+    src: "{{ env }}/dummy_node_key.json"
+    dest: "{{ node_key_path }}"
+    owner: "{{ service_identifier }}"
+    group: "{{ service_identifier }}"
+    mode: "0644"
+  when: fetch_dummy_node_key | default(false) | bool
+  notify:
+    - Restart service
+
 - name: Fetch secrets from HCP Vault and save to files
   when: fetch_vault_secrets | default(false) | bool
   block:
