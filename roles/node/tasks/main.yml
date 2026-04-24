@@ -37,6 +37,7 @@
 
 - name: Include build binary task
   ansible.builtin.include_tasks: build_binary.yml
+  when: build_binary | default(true) | bool
 
 - name: Copy genesis file
   ansible.builtin.copy:
