@@ -14,8 +14,8 @@
     directories: "{{ node_directories }}"
     log_file_path: "{{ node_log_file_path }}"
 
-- name: Include prepare server task
-  ansible.builtin.include_tasks: prepare_server.yml
+# - name: Include prepare server task
+#   ansible.builtin.include_tasks: prepare_server.yml
 
 - name: Extract near cli binary
   ansible.builtin.include_tasks: extract_binary.yml
