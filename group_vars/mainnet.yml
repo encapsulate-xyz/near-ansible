@@ -2,12 +2,12 @@
 # maintains versions and can overwrite all.yml
 near:
   validator:
-    version: 2.12.0
+    version: 2.13.0
     cli:
       general:
         version: v0.22.2
       validator:
-        version: v0.1.8
+        version: v0.1.9
     rust:
       version: 1.87.0
     rpc_url: https://rpc.mainnet.near.org
