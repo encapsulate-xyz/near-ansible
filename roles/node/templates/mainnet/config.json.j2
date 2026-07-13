@@ -278,18 +278,7 @@
   },
   "state_sync_enabled": true,
   "state_sync": {
-    "sync": {
-      "ExternalStorage": {
-        "location": {
-          "GCS": {
-            "bucket": "state-parts"
-          }
-        },
-        "num_concurrent_requests": 25,
-        "num_concurrent_requests_during_catchup": 5,
-        "external_storage_fallback_threshold": 3
-      }
-    }
+    "sync": "Peers"
   },
   "epoch_sync": {
     "disable_epoch_sync_for_bootstrapping": false,
