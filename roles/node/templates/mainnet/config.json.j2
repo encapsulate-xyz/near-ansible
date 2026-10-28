@@ -93,13 +93,6 @@
       "inbound_disabled": false,
       "connect_only_to_boot_nodes": false,
       "skip_sending_tombstones_seconds": 0,
-      "tier1_enable_inbound": true,
-      "tier1_enable_outbound": true,
-      "tier1_connect_interval": {
-        "secs": 60,
-        "nanos": 0
-      },
-      "tier1_new_connections_per_attempt": 50,
       "network_config_overrides": {
         "connect_to_reliable_peers_on_startup": null,
         "max_send_peers": null,
@@ -139,7 +132,6 @@
       3
     ],
     "produce_empty_blocks": true,
-    "block_fetch_horizon": 50,
     "block_header_fetch_horizon": 50,
     "catchup_step_period": {
       "secs": 0,
@@ -173,10 +165,6 @@
       "secs": 1,
       "nanos": 0
     },
-    "state_sync_external_backoff": {
-      "secs": 60,
-      "nanos": 0
-    },
     "header_sync_expected_height_per_second": 10,
     "sync_check_period": {
       "secs": 10,
@@ -208,11 +196,11 @@
     "nanos": 500000000
   },
   "view_client_threads": 4,
-  "view_client_throttle_period": {
+  "state_request_throttle_period": {
     "secs": 30,
     "nanos": 0
   },
-  "view_client_num_state_requests_per_throttle_period": 30,
+  "state_requests_per_throttle_period": 30,
   "trie_viewer_state_size_limit": 50000,
   "store": {
     "path": null,
@@ -271,19 +259,13 @@
       }
     ],
     "load_mem_tries_for_shards": [],
-    "load_mem_tries_for_tracked_shards": true,
-    "state_snapshot_config": {
-      "state_snapshot_type": "Enabled"
-    }
+    "load_mem_tries_for_tracked_shards": true
   },
   "state_sync_enabled": true,
   "state_sync": {
     "sync": "Peers"
   },
   "epoch_sync": {
-    "disable_epoch_sync_for_bootstrapping": false,
-    "ignore_epoch_sync_network_requests": false,
-    "epoch_sync_horizon": 216000,
     "timeout_for_epoch_sync": {
       "secs": 60,
       "nanos": 0
