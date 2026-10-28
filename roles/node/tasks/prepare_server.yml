@@ -15,6 +15,7 @@
       - libssl-dev
       - pkg-config
       - clang
+      - libclang-dev
       - llvm
       - jq
       - ccze
