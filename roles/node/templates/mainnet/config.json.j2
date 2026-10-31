@@ -80,7 +80,7 @@
       "secs": 604800,
       "nanos": 0
     },
-    "public_addrs": [],
+    "public_addrs": {{ node_public_addrs | to_json }},
     "allow_private_ip_in_public_addrs": false,
     "trusted_stun_servers": [
       "stun.l.google.com:19302",
