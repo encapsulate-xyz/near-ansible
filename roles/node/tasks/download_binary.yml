@@ -1,0 +1,30 @@
+---
+- name: Download the release binary
+  ansible.builtin.get_url:
+    url: "{{ source_url }}"
+    dest: "{{ downloaded_binary_path }}"
+    mode: "0755"
+    force: true
+
+- name: Check the downloaded binary version
+  ansible.builtin.command: "{{ downloaded_binary_path }} --version"
+  register: downloaded_binary_version
+  changed_when: false
+  failed_when: "('(release ' ~ near.validator.version ~ ')') not in downloaded_binary_version.stdout"
+
+- name: Copy the downloaded binary to the target directory
+  ansible.builtin.copy:
+    src: "{{ downloaded_binary_path }}"
+    dest: "{{ node_bin_dir }}/{{ service_identifier }}"
+    mode: "0755"
+    owner: root
+    group: root
+    remote_src: true
+    force: true
+  notify:
+    - Restart service
+
+- name: Clean up the downloaded binary
+  ansible.builtin.file:
+    path: "{{ downloaded_binary_path }}"
+    state: absent

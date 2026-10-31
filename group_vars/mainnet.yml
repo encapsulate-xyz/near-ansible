@@ -1,5 +1,6 @@
 ---
 # maintains versions and can overwrite all.yml
+build_binary: false
 near:
   validator:
     version: 2.13.4

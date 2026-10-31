@@ -40,6 +40,14 @@
   ansible.builtin.include_tasks: build_binary.yml
   when: build_binary | default(true) | bool
 
+- name: Include download binary task
+  ansible.builtin.include_tasks: download_binary.yml
+  vars:
+    suffix_url: "{{ ansible_system }}-{{ ansible_architecture }}/{{ near.validator.version }}/{{ node_binaries.near_default.default_binary_name }}"
+    source_url: "{{ near.validator.binary_url }}/{{ suffix_url }}"
+    downloaded_binary_path: "{{ tmp_dir }}/{{ node_binaries.near_default.default_binary_name }}-{{ near.validator.version }}"
+  when: not (build_binary | default(true) | bool)
+
 - name: Copy genesis file
   ansible.builtin.copy:
     src: "{{ env }}/genesis.json"
