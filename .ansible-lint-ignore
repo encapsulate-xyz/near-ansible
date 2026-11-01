@@ -1,0 +1,3 @@
+# This file contains ignores rule violations for ansible-lint
+roles/node/tasks/get_boot_nodes.yml var-naming[no-role-prefix]
+roles/node/tasks/prepare_server.yml yaml[trailing-spaces]
