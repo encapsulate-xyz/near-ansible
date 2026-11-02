@@ -39,3 +39,5 @@
             log_file_path: "{{ node_log_file_path }}"
             version_command: "{{ node_bin_dir }}/{{ service_identifier }} --version"
             health_url: "http://localhost:{{ near.validator.ports.rpc_port }}/status"
+            # the RPC opens only after the memtries load (nearcore/src/lib.rs, start_client before start_http)
+            health_retries: 60
