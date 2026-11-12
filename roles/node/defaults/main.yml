@@ -23,3 +23,6 @@ node_genesis_file_path: "{{ node_config_dir }}/{{ node_genesis_file_name }}"
 
 node_key_path: "{{ node_key_dir }}/{{ node_key_file_name }}"
 node_validator_key_path: "{{ node_key_dir }}/{{ node_validator_key_file_name }}"
+
+# advertised to other validators for TIER1; set it directly on hosts behind NAT
+node_public_addrs: "{{ [node_peer_id ~ '@' ~ ansible_default_ipv4.address ~ ':' ~ near.validator.ports.p2p_port] if node_peer_id is defined else [] }}"

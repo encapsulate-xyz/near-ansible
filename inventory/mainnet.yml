@@ -8,3 +8,5 @@ all:
       hosts:
         ts.validator.near.mainnet.encapsulate.xyz:
           type: validator
+          # public key of the node key, advertised with the host IP for TIER1
+          node_peer_id: ed25519:BedFcgGq5TNtKwRoNaSRwJH4gBHbNAoigymvKyfREqzX
