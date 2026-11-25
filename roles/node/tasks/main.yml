@@ -14,9 +14,14 @@
     directories: "{{ node_directories }}"
     log_file_path: "{{ node_log_file_path }}"
 
-- name: Include prepare server task
-  ansible.builtin.include_tasks: prepare_server.yml
-  when: build_binary | default(true) | bool
+- name: Extract near binary
+  ansible.builtin.include_tasks: extract_binary.yml
+  vars:
+    suffix_url: "{{ ansible_system }}-{{ ansible_architecture }}/{{ near.validator.version }}/{{ node_binaries.near_default.default_binary_name }}.tar.gz"
+    source_url: "{{ near.validator.binary_url }}/{{ suffix_url }}"
+    extracted_dir: "{{ ansible_system }}-{{ ansible_architecture }}"
+    binary_src_dir: "{{ extracted_dir }}/{{ node_binaries.near_default.default_binary_name }}"
+    dest_file_name: "{{ node_binaries.near_default.dest_binary_name }}"
 
 - name: Extract near cli binary
   ansible.builtin.include_tasks: extract_binary.yml
@@ -35,20 +40,6 @@
     extracted_dir: "near-validator-{{ ansible_architecture }}-unknown-{{ ansible_system | lower }}-gnu"
     binary_src_dir: "{{ extracted_dir }}/{{ node_binaries.near_validator_cli.default_binary_name }}"
     dest_file_name: "{{ node_binaries.near_validator_cli.dest_binary_name }}"
-
-- name: Include build binary task
-  ansible.builtin.include_tasks: build_binary.yml
-  when: build_binary | default(true) | bool
-
-- name: Extract near binary
-  ansible.builtin.include_tasks: extract_binary.yml
-  vars:
-    suffix_url: "{{ ansible_system }}-{{ ansible_architecture }}/{{ near.validator.version }}/{{ node_binaries.near_default.default_binary_name }}.tar.gz"
-    source_url: "{{ near.validator.binary_url }}/{{ suffix_url }}"
-    extracted_dir: "{{ ansible_system }}-{{ ansible_architecture }}"
-    binary_src_dir: "{{ extracted_dir }}/{{ node_binaries.near_default.default_binary_name }}"
-    dest_file_name: "{{ node_binaries.near_default.dest_binary_name }}"
-  when: not (build_binary | default(true) | bool)
 
 - name: Copy genesis file
   ansible.builtin.copy:

@@ -8,6 +8,4 @@ near:
         version: v0.22.2
       validator:
         version: v0.1.13
-    rust:
-      version: 1.87.0
     rpc_url: https://rpc.mainnet.near.org
