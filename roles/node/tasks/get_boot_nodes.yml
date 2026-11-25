@@ -23,10 +23,10 @@
           "\(.peer_id)@\($active_peer.addr)"' | paste -sd "," -
   args:
     executable: /bin/bash
-  register: boot_nodes_result
+  register: node_boot_nodes_result
   changed_when: false
-  failed_when: boot_nodes_result.rc != 0
+  failed_when: node_boot_nodes_result.rc != 0
 
 - name: Set boot nodes variable
   ansible.builtin.set_fact:
-    boot_nodes: "{{ boot_nodes_result.stdout }}"
+    node_boot_nodes: "{{ node_boot_nodes_result.stdout }}"
