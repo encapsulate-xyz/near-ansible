@@ -1,4 +1,12 @@
 ---
+- name: Install curl and jq to read the boot nodes
+  ansible.builtin.apt:
+    name:
+      - curl
+      - jq
+    state: present
+    update_cache: true
+
 - name: Get boot nodes
   ansible.builtin.shell: |
     set -o pipefail
