@@ -18,7 +18,7 @@
   ansible.builtin.include_tasks: extract_binary.yml
   vars:
     suffix_url: "{{ ansible_system }}-{{ ansible_architecture }}/{{ near.validator.version }}/{{ node_binaries.near_default.default_binary_name }}.tar.gz"
-    source_url: "{{ near.validator.binary_url }}/{{ suffix_url }}"
+    source_url: "{{ near.validator.source_url }}/{{ suffix_url }}"
     extracted_dir: "{{ ansible_system }}-{{ ansible_architecture }}"
     binary_src_dir: "{{ extracted_dir }}/{{ node_binaries.near_default.default_binary_name }}"
     dest_file_name: "{{ node_binaries.near_default.dest_binary_name }}"
